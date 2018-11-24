@@ -2,7 +2,7 @@ package dao;
 
 public interface UserDao {
 	public boolean addUser(String name, String password, int kind);
-	//增加一个用户，成功增加true,失败false
+	//增加一个用户，成功增加true,失败false，注册日期获取系统当前时间
 	public boolean isExistUser(String name);
 	//根据用户名判断该用户名是否存在
 	public boolean loginUser(String name, String password, int kind);
