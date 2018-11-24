@@ -1,14 +1,12 @@
 package service.impl;
 
-import java.util.List;
-
-import bean.Essay;
+import bean.Page;
 import service.MainService;
 
 public class MainServiceImpl implements MainService {
 
 	@Override
-	public List<Essay> getEssayByEssaySeeCount(int page) {
+	public Page getEssayByEssaySeeCount(int nowPage) {
 		// TODO Auto-generated method stub
 		return null;
 	}

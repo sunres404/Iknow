@@ -3,6 +3,7 @@ package dao.impl;
 import java.util.List;
 
 import bean.Essay;
+import bean.Page;
 import dao.EssayDao;
 
 public class EssayDaoImpl implements EssayDao {
@@ -15,19 +16,19 @@ public class EssayDaoImpl implements EssayDao {
 	}
 
 	@Override
-	public List<Essay> getEssayByEssaySeeCount(int page) {
+	public Page getEssayByEssaySeeCount(int nowPage) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Essay> getEssayByEssayName(String name,int page, int order) {
+	public Page getEssayByEssayName(String name,int nowPage, int order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Essay> getEssayByEssayKind(int essayKind, int page, int order) {
+	public Page getEssayByEssayKind(int essayKind, int nowPage, int order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

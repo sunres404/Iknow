@@ -8,13 +8,7 @@ public class Essay {
 	public static int KIND_ANDROID = 4;
 	public static int KIND_HTML = 5;
 	public static int KIND_SQL = 6;
-	public static int PAGE_COUNT = 5;//一页返回多少片文章
-	//返回文章的排序类型
-	public static int ORDER_NEW = 7;
-	public static int ORDER_OLD = 10;
-	public static int ORDER_HOT = 8;
-	public static int ORDER_COLD = 11;
-	public static int ORDER_RANDOM = 9;
+
 	private int id; //文章的id号， sql里面自增长的
 	private String essayName;//文章名
 	private String writerName;//用户名

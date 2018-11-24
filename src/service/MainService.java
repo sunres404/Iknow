@@ -1,10 +1,8 @@
 package service;
 
-import java.util.List;
-
-import bean.Essay;
+import bean.Page;
 
 public interface MainService {
-	public List<Essay> getEssayByEssaySeeCount(int page);
+	public Page getEssayByEssaySeeCount(int nowPage);
 	//首页展示最热的文章
 }
