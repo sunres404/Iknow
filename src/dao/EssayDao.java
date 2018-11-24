@@ -4,7 +4,7 @@ import java.util.List;
 import bean.Essay;
 
 public interface EssayDao {
-	public boolean addEssay(String essayName, String writerName, String essayContent, 
+	public Essay addEssay(String essayName, String writerName, String essayContent, 
 			String otherInfo, int essayKind);
 	//增加一篇文章, id弄成自增序列，就是他的id号主键,最后一次修改日期应该和当前日期一致，代码获取当前时间，浏览量置为0
 	
@@ -21,7 +21,7 @@ public interface EssayDao {
 	public List<Essay> getEssayByWriterName(String name, int page);
 	//根据用户名来找文章
 	
-	public boolean updateEssay(int id, String essayName, String essayContent, 
+	public Essay updateEssay(int id, String essayName, String essayContent, 
 			String otherInfo, int essayKind);
 	//更改一篇文章的信息，记住，先检测改文章是否存在,修改最后一次修改日期，其中最后一次修改日期获取系统当前时间
 	

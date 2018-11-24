@@ -8,10 +8,10 @@ import dao.EssayDao;
 public class EssayDaoImpl implements EssayDao {
 
 	@Override
-	public boolean addEssay(String essayName, String writerName,
+	public Essay addEssay(String essayName, String writerName,
 			String essayContent, String otherInfo, int essayKind) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -39,10 +39,10 @@ public class EssayDaoImpl implements EssayDao {
 	}
 
 	@Override
-	public boolean updateEssay(int id, String essayName, String essayContent,
+	public Essay updateEssay(int id, String essayName, String essayContent,
 			String otherInfo, int essayKind) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override

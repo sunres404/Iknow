@@ -1,13 +1,14 @@
 package dao.impl;
 
+import bean.User;
 import dao.UserDao;
 
 public class UserDaoImpl implements UserDao {
 
 	@Override
-	public boolean addUser(String name, String password, int kind) {
+	public User addUser(String name, String password, int kind) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -17,9 +18,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean loginUser(String name, String password, int kind) {
+	public User loginUser(String name, String password, int kind) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -28,10 +29,5 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	@Override
-	public boolean addSeeEssayCoun(String name) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
