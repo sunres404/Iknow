@@ -11,15 +11,18 @@ public interface EssayDao {
 	public List<Essay> getEssayByEssaySeeCount(int page);
 	//返回最热的几篇文章，浏览量最多的，第几页, Essay.PAGE_COUNT就是一页能容纳的文章数量
 	
-	public List<Essay> getEssayByEssayName(String name);
-	//根据文章名字查询一篇文章，注：符合匹配即可，提示： SQL like
+	public List<Essay> getEssayByEssayName(String name, int page, int order);
+	//根据文章名字查询一篇文章, order为排序方式，注：符合匹配即可，提示： SQL like
 	//返回一个文章列表给我显示，没有则返回null,后同
 	
-	public List<Essay> getEssayByEssayKind(int essayKind, int page);
+	public List<Essay> getEssayByEssayKind(int essayKind, int page, int order);
 	//根据文章类型来找文章
 	
-	public List<Essay> getEssayByWriterName(String name, int page);
+	public List<Essay> getEssayByWriterName(String name);
 	//根据用户名来找文章
+	
+	public Essay getEssayById(int id);
+	//根据文章id来查找一篇文章
 	
 	public Essay updateEssay(int id, String essayName, String essayContent, 
 			String otherInfo, int essayKind);

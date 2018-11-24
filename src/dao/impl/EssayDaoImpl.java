@@ -21,19 +21,19 @@ public class EssayDaoImpl implements EssayDao {
 	}
 
 	@Override
-	public List<Essay> getEssayByEssayName(String name) {
+	public List<Essay> getEssayByEssayName(String name,int page, int order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Essay> getEssayByEssayKind(int essayKind, int page) {
+	public List<Essay> getEssayByEssayKind(int essayKind, int page, int order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Essay> getEssayByWriterName(String name, int page) {
+	public List<Essay> getEssayByWriterName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,6 +55,12 @@ public class EssayDaoImpl implements EssayDao {
 	public boolean deleteEssay(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Essay getEssayById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

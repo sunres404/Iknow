@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User loginUser(String name, String password, int kind) {
+	public User loginUser(String name, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
