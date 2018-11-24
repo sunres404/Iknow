@@ -18,7 +18,7 @@ public class Essay {
 	private String otherInfo;//其他信息
 	private int essayKind;//文章类型
 	private int seeCount;// 浏览量
-	Essay(String eName, String wName, String eContent, String oInfo, int eKind){
+	public Essay(String eName, String wName, String eContent, String oInfo, int eKind){
 		//新增一篇文章用这个，记得set 发布日期以及最后一次修改日期一致
 		this.essayName = eName;
 		this.writerName = wName;
@@ -28,7 +28,7 @@ public class Essay {
 		this.seeCount = 0;
 	}
 	
-	Essay(int id, String eName, String wName, String eContent, String iDate,
+	public Essay(int id, String eName, String wName, String eContent, String iDate,
 			String lChange, String oInfo, int eKind, int sCount){
 		//查询返回的对象要是这个
 		this.id = id;
@@ -46,13 +46,9 @@ public class Essay {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public String getEssayName() {
 		return essayName;

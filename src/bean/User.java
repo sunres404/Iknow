@@ -11,7 +11,7 @@ public class User {
 	private int essayCount;//用户发布文章数
 	private int seeEssayCount;//用户看帖数量
 	
-	User(String name, String password, int kind){
+	public User(String name, String password, int kind){
 		//注册时用这个对象即可，注册时需要set注册日期
 		this.userName = name;
 		this.userPassword = password;
@@ -20,7 +20,7 @@ public class User {
 		this.seeEssayCount =0;
 	}
 	
-	User(String name, String password, String registerDate, int kind, int essayCount, int seeEssayCount){
+	public User(String name, String password, String registerDate, int kind, int essayCount, int seeEssayCount){
 		//查询用户数据，需返回这个对象
 		this.userName = name;
 		this.userPassword = password;

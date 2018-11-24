@@ -3,6 +3,6 @@ package service;
 import bean.Page;
 
 public interface KindService {
-	public Page getEssayByKind(int kind, int nowPage, int order);
+	public Page getEssayByKind(String kind, String nowPage, String order);
 	//分类页面
 }

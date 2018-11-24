@@ -15,6 +15,12 @@ public class Page {
 	private int nowPage;//当前页面
 	private int maxPage;//最大多少页
 	
+	public Page(List<Essay> essaies, int nowPage, int maxPage){
+		this.essaies = essaies;
+		this.nowPage = nowPage;
+		this.maxPage = maxPage;
+	}
+	
 	public List<Essay> getEssaies() {
 		return essaies;
 	}

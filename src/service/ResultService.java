@@ -3,6 +3,6 @@ package service;
 import bean.Page;
 
 public interface ResultService {
-	public Page getEssayByName(String name, int nowPage, int order);
+	public Page getEssayByName(String name, String nowPage, String order);
 	//请求结果
 }

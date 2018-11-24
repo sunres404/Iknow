@@ -20,7 +20,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User loginUser(String name, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		User user = new User(name, password, "2018-11-24", User.KIND_MANAGER, 9, 99);
+		return user;
 	}
 
 	@Override

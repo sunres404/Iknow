@@ -3,26 +3,30 @@ package service.impl;
 import dao.impl.EssayDaoImpl;
 import bean.Essay;
 import service.EssayService;
+import utils.Log;
 
 public class EssayServiceImpl implements EssayService {
 
 	@Override
 	public Essay getEssayById(String id) {
 		// TODO Auto-generated method stub
-		Essay essay=null;
+		Essay essay = null;
+		int essayId;
+		if(id == null) return null;//如果参数为空的话
 		try{
-			int essayId = Integer.parseInt(id);
-			EssayDaoImpl essayDao = new EssayDaoImpl();
-			essay = essayDao.getEssayById(essayId);
+			Log.debug(this.getClass().getName(), "要获取的id= " + id);
+			essayId = Integer.parseInt(id);
 			//根据id号来请求文章
 		}catch(Exception e){
-			essay = null;
-		}finally{
-			return essay;
+			Log.error(this.getClass().getName(), e.getMessage());
+			//出错输出出错信息
+			e.printStackTrace();
+			return null;
 		}
 		
-		
-		//return null;
+		EssayDaoImpl essayDao = new EssayDaoImpl();
+		essay = essayDao.getEssayById(essayId);
+		return essay;
 	}
 
 }
