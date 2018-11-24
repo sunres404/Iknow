@@ -7,13 +7,26 @@ public class User {
 	private String userName;
 	private String userPassword;
 	private int userKind;//用户的等级，0代表是普通用户，1代表是管理员
+	private int essayCount;//用户发布文章数
+	private int seeEssayCount;//用户看帖数量
 	
 	User(String name, String password, int kind){
+		//注册时用这个对象即可
 		this.userName = name;
 		this.userPassword = password;
 		this.userKind = kind;
+		this.essayCount = 0;
+		this.seeEssayCount =0;
 	}
 	
+	User(String name, String password, int kind, int essayCount, int seeEssayCount){
+		//查询用户数据，需返回这个对象
+		this.userName = name;
+		this.userPassword = password;
+		this.userKind = kind;
+		this.essayCount = essayCount;
+		this.seeEssayCount = seeEssayCount;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -32,6 +45,26 @@ public class User {
 	}
 	public void setUserKind(int userKind) {
 		this.userKind = userKind;
+	}
+
+
+	public int getEssayCount() {
+		return essayCount;
+	}
+
+
+	public void setEssayCount(int essayCount) {
+		this.essayCount = essayCount;
+	}
+
+
+	public int getSeeEssayCount() {
+		return seeEssayCount;
+	}
+
+
+	public void setSeeEssayCount(int seeEssayCount) {
+		this.seeEssayCount = seeEssayCount;
 	}
 	
 }

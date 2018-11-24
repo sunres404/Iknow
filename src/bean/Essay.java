@@ -8,21 +8,36 @@ public class Essay {
 	public static int KIND_ANDROID = 4;
 	public static int KIND_HTML = 5;
 	public static int KIND_SQL = 6;
-	private int id;
+	public static int PAGE_COUNT = 5;//一页返回多少片文章
+	private int id; //文章的id号， sql里面自增长的
 	private String essayName;//文章名
-	private String writerName;//作者id
-	private String essayContent;//文章内容
+	private String writerName;//用户名
+	private String essayContent;//文章内容.length测字数
 	private String issueDate;//发布日期
 	private String lastChange;//最后修改日期
+	private String otherInfo;//其他信息
 	private int essayKind;//文章类型
 	private int seeCount;// 浏览量
-	Essay(String eName, String wName, String eContent, String iDate,
-			String lChange, int eKind, int sCount){
+	Essay(String eName, String wName, String eContent, String oInfo, int eKind){
+		//新增一篇文章用这个，记得set 发布日期以及最后一次修改日期一致
+		this.essayName = eName;
+		this.writerName = wName;
+		this.essayContent = eContent;
+		this.otherInfo = oInfo;
+		this.essayKind = eKind;
+		this.seeCount = 0;
+	}
+	
+	Essay(int id, String eName, String wName, String eContent, String iDate,
+			String lChange, String oInfo, int eKind, int sCount){
+		//查询返回的对象要是这个
+		this.id = id;
 		this.essayName = eName;
 		this.writerName = wName;
 		this.essayContent = eContent;
 		this.issueDate = iDate;
 		this.lastChange = lChange;
+		this.otherInfo = oInfo;
 		this.essayKind = eKind;
 		this.seeCount = sCount;
 	}
@@ -74,6 +89,15 @@ public class Essay {
 	public void setLastChange(String lastChange) {
 		this.lastChange = lastChange;
 	}
+	
+	public String getOtherInfo() {
+		return otherInfo;
+	}
+
+	public void setOtherInfo(String otherInfo) {
+		this.otherInfo = otherInfo;
+	}
+
 	public int getEssayKind() {
 		return essayKind;
 	}
