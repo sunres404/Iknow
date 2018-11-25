@@ -9,5 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="${pageContext.request.contextPath }/RegisterServlet" method="post">
+		<input type="text" name="userName"><br>
+		<c:if test="${! empty usererror }">
+			用户名或密码有误！
+		</c:if>
+		<input type="text" name="userPassowrd"><br>
+		<input type="submit" value="注册">
+</form>
 </body>
 </html>

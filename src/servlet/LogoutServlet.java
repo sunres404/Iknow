@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.SUtil;
+
 /**
  * Servlet implementation class LogoutServlet
  */
@@ -32,6 +34,8 @@ public class LogoutServlet extends HttpServlet {
 		cookie.setMaxAge(0);//立即删除cookie
 		cookie.setPath(request.getContextPath());
 		response.addCookie(cookie);
+		response.sendRedirect(SUtil.URL_PAGE_LOGIN);
+		//当用户退出的时候，就换到登陆的界面
 	}
 
 	/**

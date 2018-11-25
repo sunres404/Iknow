@@ -1,9 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import service.impl.LoginServiceImpl;
 import utils.Log;
+import utils.SUtil;
 import bean.User;
 
 /**
@@ -54,22 +53,20 @@ public class LoginServlet extends HttpServlet {
 			//存在该用户,跳转到我的页面
 			Log.debug(this.getClass().getName(), "该用户存在！");
 			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+			session.setAttribute(SUtil.SESSION_NAME_USER, user);
 			//在session域中设置用户的存在
-			Cookie cookie = new Cookie("autologin", URLEncoder.encode(user.getUserName() +
-					"@" + user.getUserPassword(), "UTF-8"));
-			cookie.setMaxAge(60*24);//设定cookie有效期为一天
+			String autologin = user.getUserName() + SUtil.COOKIE_SPLIT + user.getUserPassword();
+			Cookie cookie = new Cookie(SUtil.COOKIE_NAME_AUTOLOGIN, SUtil.encode(autologin));
+			cookie.setMaxAge(SUtil.COOKIE_MAXAGE);//设定cookie有效期为一天
 			cookie.setPath(request.getContextPath());
 			response.addCookie(cookie);
 			//在cookie中添加了账号与密码
-//			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() 
-//					+ "/pages/user/test.jsp");
-//			Log.debug(this.getClass().getName(), request.getContextPath() + "/pages/user/test.jsp");
-//			dispatcher.forward(request, response);
-			response.sendRedirect("/Iknow/pages/user/test.jsp");
+			response.sendRedirect(SUtil.URL_SERVLET_USER);//转发到获取用户信息这个Servlet
 		}else{
 			//不存在该用户
 			Log.debug(this.getClass().getName(), "该用户不存在！");
+			response.sendRedirect(SUtil.URL_PAGE_LOGIN);
+			//登陆界面
 		}
 	}
 

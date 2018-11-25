@@ -7,8 +7,9 @@ import utils.Log;
 
 public class WriteServiceImpl implements WriteService {
 
-	@Override
-	public Essay getEssayById(String id) {
+	
+	
+	private Essay getEssayById(String id) {
 		// TODO Auto-generated method stub
 		Essay essay;
 		if(id == null) return null;//如果参数为空的话
@@ -27,8 +28,8 @@ public class WriteServiceImpl implements WriteService {
 		return essay;
 	}
 
-	@Override
-	public Essay addEssay(String essayName, String writerName,
+
+	private Essay addEssay(String essayName, String writerName,
 			String essayContent, String otherInfo, String esKd) {
 		// TODO Auto-generated method stub
 		if(essayName == null || writerName == null || essayContent == null
@@ -46,8 +47,7 @@ public class WriteServiceImpl implements WriteService {
 		return essayDao.addEssay(essayName, writerName, essayContent, otherInfo, essayKind);
 	}
 
-	@Override
-	public Essay updateEssay(String id, String essayName, String essayContent,
+	private Essay updateEssay(String id, String essayName, String essayContent,
 			String otherInfo, String esKd) {
 		// TODO Auto-generated method stub
 		int essayId;
@@ -65,5 +65,42 @@ public class WriteServiceImpl implements WriteService {
 		EssayDaoImpl essayDao = new EssayDaoImpl();
 		return essayDao.updateEssay(essayId, essayName, essayContent, otherInfo, essayKind);
 	}
+	
+	
+	
+	@Override
+	public Essay writeEssay(String w, String id, String essayName, String writerName,
+			String essayContent, String otherInfo, String essayKind){
+		//way=1 即update的时候，收集这些信息去更新
+		//不存在way参数或者way参数为其他的时候，则新建一篇文章！
+		Essay essay = null;
+		int way;
+		try{
+			way = Integer.parseInt(w);
+		}catch(Exception e){
+			Log.error(this.getClass().getName(), e.getMessage());
+			way = WAY_WRITE_NEW_ESSAY;
+			Log.debug(this.getClass().getName(), "没有way或者way=" + way + "默认新建文章");
+		}
+		if(way == WAY_GET_ESSAY_ID){
+			//获得一篇文章
+			Log.debug(this.getClass().getName(), "获得一篇文章");
+			essay = this.getEssayById(id);
+		}else if(way == WAY_UPDATE_ESSAY){
+			//更新一篇文章
+			Log.debug(this.getClass().getName(), "更新一篇文章");
+			essay = this.updateEssay(id, essayName, essayContent, otherInfo, essayKind);
+		}else{
+			//默认新则增加了一篇文章
+			Log.debug(this.getClass().getName(), "新增加了一篇文章");
+			essay = this.addEssay(essayName, writerName, essayContent, otherInfo, essayKind);
+		}
+		if(essay != null){
+			Log.debug(this.getClass().getName(),
+					"返回的essay不为空，essayName=" + essay.getEssayName());
+		}
+		return essay;
+	}
+	
 
 }

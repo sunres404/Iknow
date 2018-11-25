@@ -42,6 +42,13 @@ public class Essay {
 		this.seeCount = sCount;
 	}
 	
+	public Essay(int id, String name, String content){
+		//nowPage请求时，返回Page里面List里面的对象此构造
+		this.id = id;
+		this.essayName = name;
+		this.essayContent = content;//这个只用展示前几字Page.PAGE_ESSAY_COUNT,多余的去掉
+	}
+	
 	public int getId() {
 		return id;
 	}

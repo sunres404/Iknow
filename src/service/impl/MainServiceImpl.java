@@ -14,7 +14,6 @@ public class MainServiceImpl implements MainService {
 		try{
 			nowPage = Integer.parseInt(np);
 		}catch(Exception e){
-			e.printStackTrace();
 			Log.error(this.getClass().getName(), "nowPage= " + np);
 			nowPage = 1;
 		}

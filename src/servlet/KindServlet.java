@@ -1,10 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import bean.Page;
+import service.impl.KindServiceImpl;
+import utils.Log;
+import utils.SUtil;
 
 /**
  * Servlet implementation class KindServlet
@@ -25,6 +32,7 @@ public class KindServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		this.doPost(request, response);
 	}
 
 	/**
@@ -32,6 +40,21 @@ public class KindServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String kind = request.getParameter(SUtil.PARAMETER_KIND);
+		String nowPage = request.getParameter(SUtil.PARAMETER_NOWPAGE);
+		String order = request.getParameter(SUtil.PARAMETER_ORDER);
+		Log.debug(this.getClass().getName(), "kind=" + kind + " nowPage="
+												+ nowPage + " order=" + order);
+		KindServiceImpl kindService = new KindServiceImpl();
+		Page page = kindService.getEssayByKind(kind, nowPage, order);
+		if(page != null){
+			Log.debug(this.getClass().getName(), "page不为空，将重定向到kind.jsp");
+		}else{
+			Log.debug(this.getClass().getName(), "page为空");
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute(SUtil.SESSION_NAME_PAGE, page);
+		response.sendRedirect(SUtil.URL_PAGE_KIND);
 	}
 
 }
