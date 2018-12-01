@@ -4,7 +4,8 @@ import bean.Essay;
 public interface WriteService {
 	public static int WAY_GET_ESSAY_ID = 1;//更新并获取id更新后的信息
 	public static int WAY_WRITE_NEW_ESSAY = 2;//新建一篇新文章
-	public static int WAY_UPDATE_ESSAY = 3;
+	public static int WAY_UPDATE_ESSAY = 3;//更新一篇文章
+	public static int WAY_DELETE_ESSAY = 4;//删除一篇文章
 	
 	/*
 	public Essay getEssayById(String id);

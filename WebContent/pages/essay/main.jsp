@@ -5,34 +5,77 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>首页</title>
+<meta charset="UTF-8">
+<title>文章发布系统首页</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+function page(obj){
+	var pageid=document.getElementsByClassName("page");
+	for(var i=0;i<pageid.length;i++){
+		if(pageid[i]!=obj){
+			pageid[i].classList.remove("active");	
+		}
+	}
+	obj.classList.add("active");
+
+}
+function formPage(){
+	var pageid=document.getElementsByClassName("page");
+	for(var i=0;i<pageid.length;i++){
+		if(pageid[i].classList.contains("active")==true){
+			if(i-1>=0){
+				pageid[i].classList.remove("active");
+				pageid[i-1].classList.add("active");
+			}	
+		}
+	}
+	
+}
+function nextPage(){
+	var pageid=document.getElementsByClassName("page");
+	for(var i=0;i<pageid.length;i++){
+		if(pageid[i].classList.contains("active")==true){
+			if(i+1<pageid.length){
+				pageid[i].classList.remove("active");
+				pageid[i+1].classList.add("active");
+				break;
+			}	
+		}
+	}
+	
+}
+</script>
 </head>
-<body>
-	<jsp:include page="/pages/include/head.jsp" flush="true" />
-	<c:choose>
+<body >
+<jsp:include page="/pages/include/head.jsp" flush="true" />
+<c:choose>
 		<c:when test="${not empty sessionScope.page }">
-			返回了页码
-			当前页：${page.nowPage }<br>
-			最大页：${page.maxPage }<br>
 			<c:choose>
 				<c:when test="${not empty sessionScope.page.essaies }">
 					<c:forEach var="essay" items="${sessionScope.page.essaies }">
-						id为---${essay.id}<br>
-						<a href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">标题为---${essay.essayName }</a><br>
-						内容简略为---${essay.essayContent }<br>
-						<br>---------------------------<br>
+						<div id="book">
+							<div>
+								<a id="title" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayName }</a>
+								<a id="content" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayContent }</a>
+							</div>
+						</div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					文章为空
 				</c:otherwise>
 			</c:choose>
+				<div id="uldiv">
+					<ul class="pagination">
+						<li><a href="${pageContext.request.contextPath }/MainServlet?nowPage=${page.nowPage - 1}" onclick="formPage()">«</a></li>
+						<li><a class="page active" href="#" onclick="page(this)">${page.nowPage}</a></li>
+						<li><a href="${pageContext.request.contextPath }/MainServlet?nowPage=${page.nowPage + 1}" onclick="nextPage()">»</a></li>
+					</ul>
+				</div>
 		</c:when>
 		<c:otherwise>
-			没有返回页码
+			没有返回Page
 		</c:otherwise>
 	</c:choose>
-	<jsp:include page="/pages/include/bottom.jsp" flush="true" />
 </body>
 </html>

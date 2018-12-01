@@ -16,7 +16,6 @@ public class ResultServiceImpl implements ResultService {
 		try{
 			nowPage = Integer.parseInt(np);
 		}catch(Exception e){
-			e.printStackTrace();
 			Log.error(this.getClass().getName(), "nowPage" + np);
 			nowPage = 1;
 		}
@@ -25,11 +24,11 @@ public class ResultServiceImpl implements ResultService {
 		try{
 			order = Integer.parseInt(od);
 		}catch(Exception e){
-			e.printStackTrace();
 			Log.error(this.getClass().getName(), "order=" + od);
 			order = Page.ORDER_HOT;
 		}
 		EssayDaoImpl essayDao = new EssayDaoImpl();
+		Log.debug(this.getClass().getName(), "name=" + name + " nowPage=" + nowPage + " order=" + order);
 		return essayDao.getEssayByEssayName(name, nowPage, order);
 	}
 

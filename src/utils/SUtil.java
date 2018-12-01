@@ -5,8 +5,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 public class SUtil {
-	public static String[] noFilterUrl = new String[]{};
+	
 	public static String URL_NAME = "/Iknow";
+	public static String[] noFilterUrl_deleteEditEssay = new String[]{URL_NAME + "/pages/essay/write.jsp"};
+	//这是不要去删除要编辑参数的essay
 	public static String URL_PAGE_LOGIN = URL_NAME + "/pages/user/login.jsp";
 	public static String URL_PAGE_REGISTER = URL_NAME + "/pages/user/register.jsp";
 	public static String URL_PAGE_USER = URL_NAME + "/pages/user/user.jsp";
@@ -24,7 +26,10 @@ public class SUtil {
 	public static String SESSION_NAME_USER = "user";
 	public static String SESSION_NAME_PAGE = "page";
 	public static String SESSION_NAME_ESSAY = "essay";
+	public static String SESSION_NAME_WRITEESSAY = "writeEssay";
 	public static String SESSION_NAME_ESSAYLIST = "essaylist";
+	public static String SESSION_NAME_KIND = "kind";
+	public static String SESSION_NAME_ORDER = "order";
 	
 	public static String COOKIE_NAME_AUTOLOGIN = "autologin";
 	public static String COOKIE_SPLIT = "@";
@@ -32,7 +37,7 @@ public class SUtil {
 	public static String PARAMETER_WAY = "way";
 	public static String PARAMETER_ID = "id";
 	public static String PARAMETER_USERNAME = "userName";
-	public static String PARAMETER_PASSWORD = "userPassowrd";
+	public static String PARAMETER_PASSWORD = "userPassword";
 	public static String PARAMETER_ESSAYNAME = "essayName";
 	public static String PARAMETER_KIND = "kind";
 	public static String PARAMETER_ESSAYKIND = "essayKind";

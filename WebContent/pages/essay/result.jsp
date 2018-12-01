@@ -5,26 +5,37 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>首页</title>
+<meta charset="UTF-8">
+<title>查询结果页</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript" src="onclick.js"></script>
+
 </head>
 <body>
-	<jsp:include page="/pages/include/head.jsp" flush="true" />
-	<form action="${pageContext.request.contextPath }/ResultServlet?essayName=算法" method="post">
-				<input type="submit" value="搜索文章名为算法的文章">
-	</form>
+<jsp:include page="/pages/include/head.jsp" flush="true" />
+<div id="otherkind">
+<a href="${pageContext.request.contextPath }/ResultServlet?essayName=${sessionScope.essayName}&order=0">
+	<button type="button" <c:if test="${sessionScope.order == 0 }">class="on"</c:if> id="otherkind0" >发布日期</button>
+</a><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${sessionScope.essayName}&order=1">
+	<button type="button" <c:if test="${sessionScope.order == 1 }">class="on"</c:if> id="otherkind1" >文章热度↑</button>
+</a><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${sessionScope.essayName}&order=2">
+	<button type="button" <c:if test="${sessionScope.order == 2 }">class="on"</c:if> id="otherkind2" >文章字数↑</button>
+</a><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${sessionScope.essayName}&order=3">
+	<button type="button" <c:if test="${sessionScope.order == 3 }">class="on"</c:if> id="otherkind3" >随机☈</button>
+</a>
+</div>
+
 	<c:choose>
 		<c:when test="${not empty sessionScope.page }">
-			返回了页码
-			当前页：${page.nowPage }<br>
-			最大页：${page.maxPage }<br>
 			<c:choose>
 				<c:when test="${not empty sessionScope.page.essaies }">
 					<c:forEach var="essay" items="${sessionScope.page.essaies }">
-						id为---${essay.id}<br>
-						标题为---${essay.essayName }<br>
-						内容简略为---${essay.essayContent }<br>
-						<br>---------------------------<br>
+						<div id="book">
+							<div>
+								<a id="title" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}"> ${essay.essayName }</a>
+								<a id="content" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayContent } </a>
+							</div>
+						</div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -36,21 +47,19 @@
 			没有返回页码
 		</c:otherwise>
 	</c:choose>
-	
 	<c:choose>
 		<c:when test="${not empty sessionScope.page }">
-			当前页：${page.nowPage }<br>
-			最大页：${page.maxPage }<br>
-			<form action="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage - 1}&order=2" method="post">
-				<input type="submit" value="上一页">
-			</form>
-			<form action="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage + 1}&order=2" method="post">
-				<input type="submit" value="下一页">
-			</form>
+			<div id="uldiv">
+				<ul class="pagination">
+				 	<li><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage - 1}">«</a></li>
+				 	<li><a class="page active" href="#" onclick="page(this)">${page.nowPage }</a></li>
+				  	<li><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage + 1}&order=2">»</a></li>
+				</ul>
+			</div>
 		</c:when>
 		<c:otherwise>
 			没有返回页码
 		</c:otherwise>
-</c:choose>
+	</c:choose>
 </body>
 </html>

@@ -5,8 +5,23 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>用户界面</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+
+
+function doWrite(){
+	window.location.href="../essay/write.jsp";
+}
+
+function goLogin(){
+	window.location.href="login.jsp";
+}
+function goEssay(){
+	window.location.href="essay.html";
+}
+</script>
 </head>
 <body>
 <jsp:include page="/pages/include/head.jsp" flush="true" />
@@ -15,30 +30,39 @@
 		<a href="${pageContext.request.contextPath }/pages/user/login.jsp">用户登陆</a>
 	</c:when>
 	<c:otherwise>
-		用户名: ${sessionScope.user.userName }<br>
-		密码： ${sessionScope.user.userPassword }<br>
-		注册日期：${sessionScope.user.registerDate }<br>
-		发布文章数量: ${sessionScope.uesr.essayCount }<br>
-		浏览量： ${sessionScope.user.seeEssayCount }<br>
-		<c:if test="${sessionScope.user.userKind == 1 }">
-			管理员认证！<br>
-		</c:if>
-		
-		所写文章信息：<br>
-		<c:choose>
-			<c:when test="${empty sessionScope.essaylist }">
-				你没写任何文章
-			</c:when>
+		<div id="mymessage">
+			<p style="margin-left:100px;font-size:20px;">我的信息</p>
+			<p>用户名：${sessionScope.user.userName }</p>
+			<p>注册日期：${sessionScope.user.registerDate }</p>
+			<p>发布文章数：${sessionScope.user.essayCount }</p>
+			<p>浏览量： ${sessionScope.user.seeEssayCount }</p>
+			<c:if test="${sessionScope.user.userKind == 1 }">
+					<img src="success.png" style="width:120px;height:100px;margin-left:100px;margin-top:20px;"/>
+			</c:if>
+		</div>
+		<div id="myartical">
+			<p style="margin-left:100px;font-size:20px;">我的文章</p>
 			
-			<c:otherwise>
-				<c:forEach var="essay" items="${ sessionScope.essaylist }">
-					${essay.essayName }<br>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		<br>
-	<a href="${pageContext.request.contextPath }/LogoutServlet">退出</a>
+				所写文章信息：<br>
+				<c:choose>
+					<c:when test="${empty sessionScope.essaylist }">
+						你没写任何文章
+					</c:when>
+					
+					<c:otherwise>
+						<c:forEach var="essay" items="${ sessionScope.essaylist }">
+							<p>${essay.essayName }</p>
+							<a href="${pageContext.request.contextPath }/WriteServlet?way=1&id=${essay.id }"><img src="editor.png"/></a>
+							<a href="${pageContext.request.contextPath }/WriteServlet?way=4&id=${essay.id }"><img src="delete.png"/></a>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+		</div>
 	</c:otherwise>
 </c:choose>
+<div id="mybutton">
+	<img  src="submit.png" onclick="doWrite()" />
+	<img src="quit.png" onclick="goLogin()"/>
+</div>
 </body>
 </html>

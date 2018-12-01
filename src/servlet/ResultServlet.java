@@ -43,6 +43,8 @@ public class ResultServlet extends HttpServlet {
 		String essayName = request.getParameter(SUtil.PARAMETER_ESSAYNAME);
 		String nowPage = request.getParameter(SUtil.PARAMETER_NOWPAGE);
 		String order = request.getParameter(SUtil.PARAMETER_ORDER);
+		Log.debug(this.getClass().getName(), "name=" + essayName + "nowPage=" + nowPage +
+				nowPage + " order=" + order);
 		ResultServiceImpl resultService = new ResultServiceImpl();
 		Page page = resultService.getEssayByName(essayName, nowPage, order);
 		HttpSession session = request.getSession();
@@ -50,6 +52,7 @@ public class ResultServlet extends HttpServlet {
 		//这个是暂时性设置搜索名称的，正确的做法应该是传到page里面
 		session.setAttribute(SUtil.SESSION_NAME_PAGE, page);
 		if(page != null){
+			session.setAttribute(SUtil.SESSION_NAME_ESSAY, essayName);
 			Log.debug(this.getClass().getName(), "请求结果page对象不为空,重定向到result.jsp");
 		}
 		

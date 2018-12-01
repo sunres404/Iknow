@@ -4,16 +4,31 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>head</title>
+<meta charset="UTF-8">
+<title>文章</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+function goWrite(){
+	window.location.href="write.html";
+}
+</script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/MainServlet">首页</a>&nbsp;&nbsp;&nbsp;
-<a href="${pageContext.request.contextPath }/pages/essay/kind.jsp">分类</a>&nbsp;&nbsp;&nbsp;
-<a href="${pageContext.request.contextPath }/pages/user/user.jsp">我的</a>&nbsp;&nbsp;&nbsp;
-<form action="${pageContext.request.contextPath }/ResultServlet" method="post">
-	<input type="text" name="essayName">
-	<input type="submit" value="查询">
-</form>
+<div id="blank">
+文章发布系统
+</div>
+<div id="header">
+	<div>
+		<a href="${pageContext.request.contextPath }/MainServlet" id="vice">首页</a>
+		<a href="${pageContext.request.contextPath }/pages/essay/kind.jsp" id="vice">分类</a>
+		<a href="${pageContext.request.contextPath }/UserServlet" id="vice">我的</a>
+	</div>
+</div>
+<div id="box">
+	<form action="${pageContext.request.contextPath }/ResultServlet" method="post">
+		<input type="text" name="essayName" placeholder="请输入关键字">
+	    <button type="submit" id="search"  >搜索</button>
+	</form>
+</div>
 </body>
 </html>

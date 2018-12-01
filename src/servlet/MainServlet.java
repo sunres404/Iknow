@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,9 @@ public class MainServlet extends HttpServlet {
 			Log.debug(this.getClass().getName(), "获取数据成功，即将跳转至main.jsp");
 			Log.debug(this.getClass().getName(), page.getEssaies().get(0).getEssayName());
 		}
+		//RequestDispatcher dispatcher = request.getRequestDispatcher(SUtil.URL_PAGE_MAIN);
+		//dispatcher.forward(request, response);
+		
 		response.sendRedirect(SUtil.URL_PAGE_MAIN);
 	}
 

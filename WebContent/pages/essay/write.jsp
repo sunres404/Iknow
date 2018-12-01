@@ -5,27 +5,120 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>文章内容页</title>
+<meta charset="UTF-8">
+<title>写文章</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+
+function select(kind){
+	
+	for(var i=1;i<=7;i++){
+		var str=document.getElementById('kind'+i);
+		if(str!=document.getElementById(kind)){
+			str.style.backgroundColor='#c0c0c0';
+		}else{
+			document.getElementById(kind).style.backgroundColor='#595959';
+		}
+		
+	}
+}
+function selectother(otherkind){
+	
+	for(var i=1;i<=4;i++){
+		var str=document.getElementById('otherkind'+i);
+		if(str!=document.getElementById(otherkind)){
+			str.style.backgroundColor='#c0c0c0';
+		}else{
+			document.getElementById(otherkind).style.backgroundColor='#595959';
+		}
+		
+	}
+}
+
+
+</script>
 </head>
 <body>
+<jsp:include page="/pages/include/head.jsp" flush="true" />
 <c:choose>
-	<c:when test="${not empty sessionScope.essay }">
-	<form action="${pageContext.request.contextPath }/WriteServlet?way=2&id=${sessionScope.essay.id }&" method="post">
-		id = ${sessionScope.essay.id }<br>
-		标题<input type="text" name="essayName" value="${sessionScope.essay.essayName }"><br>
-		作者<input type="text" name="writerName" value="${sessionScope.essay.writerName }"><br>
-		内容<input type="text" name="essayContent" value="${sessionScope.essay.essayContent }"><br>
-		发布日期<input type="text" name="issueDate" value="${sessionScope.essay.issueDate }"><br>
-		最后修改<input type="text" name="lastChange" value="${sessionScope.essay.lastChange }"><br>
-		其他信息<input type="text" name="otherInfo" value="${sessionScope.essay.otherInfo }"><br>
-		被浏览量<input type="text" name="seeCount" value="${sessionScope.essay.seeCount }"><br>
-		<input type="submit" value="确认提交">
-	</form>
+	<c:when test="${not empty sessionScope.writeEssay }">
+		<form action="${pageContext.request.contextPath }/WriteServlet?way=3&id=${sessionScope.writeEssay.id }&" method="post">
+			<div id="user">
+					<p>题目：</p>
+					<input type="text" name="essayName" placeholder="${sessionScope.writeEssay.essayName }">
+				</div>
+				<div id="kind">
+					<input type="radio" <c:if test="${writeEssay.essayKind == 0 }">checked</c:if> name="essayKind" value="0">C&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 1 }">checked</c:if> name="essayKind" value="1">C++&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 2 }">checked</c:if> name="essayKind" value="2">Java&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 3 }">checked</c:if> name="essayKind" value="3">Python&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 4 }">checked</c:if> name="essayKind" value="4">Android&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 5 }">checked</c:if> name="essayKind" value="5">Html&nbsp;&nbsp;
+					<input type="radio" <c:if test="${writeEssay.essayKind == 6 }">checked</c:if> name="essayKind" value="6">SQL
+				</div>
+				<div id="label">
+					<p>
+						正文：
+					</p>
+				</div>
+				<div id="artical">
+					<textarea rows="3" cols="20" name="essayContent">
+						${sessionScope.writeEssay.essayContent }
+					</textarea>
+				</div>
+				<div id="label">
+					<p>
+						附加信息：
+					</p>
+				</div>
+				<div id="extramessage">
+					<textarea rows="3" cols="20" name="otherInfo">
+						${sessionScope.writeEssay.otherInfo }
+					</textarea>
+				</div>
+				<div id="user_button">	
+					<input type="submit" value="确认提交">
+				</div>	
+		</form>
 	</c:when>
 	<c:otherwise>
-		没有获取到文章哦~
+		<form action="${pageContext.request.contextPath }/WriteServlet?way=2&" method="post">
+			<div id="user">
+					<p>题目：</p>
+					<input type="text" name="essayName" placeholder="">
+				</div>
+				<div id="kind">
+					<input type="radio" name="essayKind" value="0">C&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="1">C++&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="2">Java&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="3">Python&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="4">Android&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="5">Html&nbsp;&nbsp;
+					<input type="radio" name="essayKind" value="6">SQL
+				</div>
+				<div id="label">
+					<p>
+						正文：
+					</p>
+				</div>
+				<div id="artical">
+					<textarea rows="3" cols="20"  name="essayContent"></textarea>
+				</div>
+				<div id="label">
+					<p>
+						附加信息：
+					</p>
+				</div>
+				<div id="extramessage">
+					<textarea rows="3" cols="20"  name="otherInfo"></textarea>
+				</div>
+				<div id="user_button">	
+					<input type="submit" value="确认提交">
+				</div>	
+		</form>
 	</c:otherwise>
 </c:choose>
+
+
 </body>
 </html>

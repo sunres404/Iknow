@@ -25,7 +25,6 @@ public class KindServiceImpl implements KindService {
 		try{
 			nowPage = Integer.parseInt(np);
 		}catch(Exception e){
-			e.printStackTrace();
 			Log.error(this.getClass().getName(), "nowPage" + np);
 			nowPage = 1;
 		}
@@ -36,7 +35,7 @@ public class KindServiceImpl implements KindService {
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.error(this.getClass().getName(), "order=" + od);
-			order = Page.ORDER_HOT;
+			order = Page.ORDER_NEW;
 		}
 		
 		String info = "kind=" + kind + " nowPage=" + nowPage + " order=" + order;

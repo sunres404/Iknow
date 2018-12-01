@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>查询结果页</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript" src="onclick.js"></script>
+
+</head>
+<body>
+<jsp:include page="/pages/include/head.jsp" flush="true" />
+
+
+<div id="otherkind">
+	<button type="button" id="otherkind1" onclick="selectother('otherkind1')">发布日期</button>
+	<button type="button" id="otherkind2" onclick="selectother('otherkind2')">文章热度↑</button>
+	<button type="button" id="otherkind3" onclick="selectother('otherkind3')">文章字数↑</button>
+	<button type="button" id="otherkind4" onclick="selectother('otherkind4')">随机☈</button>
+</div>
+<div id="otherkind">
+	<button type="button" id="otherkind1" onclick="selectother('otherkind1')">发布日期</button>
+	<button type="button" id="otherkind2" onclick="selectother('otherkind2')">文章热度↑</button>
+	<button type="button" id="otherkind3" onclick="selectother('otherkind3')">文章字数↑</button>
+	<button type="button" id="otherkind4" onclick="selectother('otherkind4')">随机☈</button>
+</div>
+	<c:choose>
+		<c:when test="${not empty sessionScope.page }">
+			<c:choose>
+				<c:when test="${not empty sessionScope.page.essaies }">
+					<c:forEach var="essay" items="${sessionScope.page.essaies }">
+						<div id="book">
+							<div>
+								<a id="title" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}"> ${essay.essayName }</a>
+								<a id="content" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayContent } </a>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					文章为空
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			没有返回页码
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${not empty sessionScope.page }">
+			<div id="uldiv">
+				<ul class="pagination">
+				 	<li><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage - 1}">«</a></li>
+				 	<li><a class="page active" href="#" onclick="page(this)">${page.nowPage }</a></li>
+				  	<li><a href="${pageContext.request.contextPath }/ResultServlet?essayName=${essayName }&nowPage=${page.nowPage + 1}&order=2">»</a></li>
+				</ul>
+			</div>
+		</c:when>
+		<c:otherwise>
+			没有返回页码
+		</c:otherwise>
+	</c:choose>
+</body>
+</html>

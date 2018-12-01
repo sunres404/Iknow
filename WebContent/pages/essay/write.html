@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>写文章</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+
+function select(kind){
+	
+	for(var i=1;i<=7;i++){
+		var str=document.getElementById('kind'+i);
+		if(str!=document.getElementById(kind)){
+			str.style.backgroundColor='#c0c0c0';
+		}else{
+			document.getElementById(kind).style.backgroundColor='#595959';
+		}
+		
+	}
+}
+function selectother(otherkind){
+	
+	for(var i=1;i<=4;i++){
+		var str=document.getElementById('otherkind'+i);
+		if(str!=document.getElementById(otherkind)){
+			str.style.backgroundColor='#c0c0c0';
+		}else{
+			document.getElementById(otherkind).style.backgroundColor='#595959';
+		}
+		
+	}
+}
+
+
+</script>
+</head>
+<body>
+
+<c:choose>
+	<c:when test="${not empty sessionScope.essay }">
+		<form action="${pageContext.request.contextPath }/WriteServlet?way=3&id=${sessionScope.essay.id }&" method="post">
+			<div id="user">
+					<p>题目：</p>
+					<input type="text" name="title" placeholder="${sessionScope.essay.essayName }">
+				</div>
+				<div id="kind">
+					<input type="radio" name="kind" value="0">C&nbsp;&nbsp;
+					<input type="radio" name="kind" value="1">C++&nbsp;&nbsp;
+					<input type="radio" name="kind" value="2">Java&nbsp;&nbsp;
+					<input type="radio" name="kind" value="3">Python&nbsp;&nbsp;
+					<input type="radio" name="kind" value="4">Android&nbsp;&nbsp;
+					<input type="radio" name="kind" value="5">Html&nbsp;&nbsp;
+					<input type="radio" name="kind" value="6">SQL
+				</div>
+				<div id="label">
+					<p>
+						正文：
+					</p>
+				</div>
+				<div id="artical">
+					<textarea rows="3" cols="20">
+						${sessionScope.essay.essayContent }
+					</textarea>
+				</div>
+				<div id="label">
+					<p>
+						附加信息：
+					</p>
+				</div>
+				<div id="extramessage">
+					<textarea rows="3" cols="20">
+						${sessionScope.essay.otherInfo }
+					</textarea>
+				</div>
+				<div id="user_button">	
+					input type="submit" value="确认提交">
+				</div>	
+		</form>
+	</c:when>
+	<c:otherwise>
+		<form action="${pageContext.request.contextPath }/WriteServlet?way=2" method="post">
+			<div id="user">
+					<p>题目：</p>
+					<input type="text" name="title" placeholder="">
+				</div>
+				<div id="kind">
+					<input type="radio" name="kind" value="0">C&nbsp;&nbsp;
+					<input type="radio" name="kind" value="1">C++&nbsp;&nbsp;
+					<input type="radio" name="kind" value="2">Java&nbsp;&nbsp;
+					<input type="radio" name="kind" value="3">Python&nbsp;&nbsp;
+					<input type="radio" name="kind" value="4">Android&nbsp;&nbsp;
+					<input type="radio" name="kind" value="5">Html&nbsp;&nbsp;
+					<input type="radio" name="kind" value="6">SQL
+				</div>
+				<div id="label">
+					<p>
+						正文：
+					</p>
+				</div>
+				<div id="artical">
+					<textarea rows="3" cols="20">
+						
+					</textarea>
+				</div>
+				<div id="label">
+					<p>
+						附加信息：
+					</p>
+				</div>
+				<div id="extramessage">
+					<textarea rows="3" cols="20">
+						
+					</textarea>
+				</div>
+				<div id="user_button">	
+					input type="submit" value="确认提交">
+				</div>	
+		</form>
+	</c:otherwise>
+</c:choose>
+
+
+</body>
+</html>
+
+
+		标题<input type="text" name="essayName" value="${sessionScope.essay.essayName }"><br>
+		作者<input type="text" name="writerName" value="${sessionScope.essay.writerName }"><br>
+		内容<input type="text" name="essayContent" value="${sessionScope.essay.essayContent }"><br>
+		发布日期<input type="text" name="issueDate" value="${sessionScope.essay.issueDate }"><br>
+		最后修改<input type="text" name="lastChange" value="${sessionScope.essay.lastChange }"><br>
+		其他信息<input type="text" name="otherInfo" value="${sessionScope.essay.otherInfo }"><br>
+		文章类型<input type="text" name="essayKind" value="${sessionScope.essay.essayKind }"><br>
+		被浏览量<input type="text" name="seeCount" value="${sessionScope.essay.seeCount }"><br>
+		<input type="submit" value="确认提交">
+		id = ${sessionScope.essay.id }<br>
+		标题<input type="text" name="essayName" value="${sessionScope.essay.essayName }"><br>
+		作者<input type="text" name="writerName" value="${sessionScope.essay.writerName }"><br>
+		内容<input type="text" name="essayContent" value="${sessionScope.essay.essayContent }"><br>
+		发布日期<input type="text" name="issueDate" value="${sessionScope.essay.issueDate }"><br>
+		最后修改<input type="text" name="lastChange" value="${sessionScope.essay.lastChange }"><br>
+		其他信息<input type="text" name="otherInfo" value="${sessionScope.essay.otherInfo }"><br>
+		文章类型<input type="text" name="essayKind" value="${sessionScope.essay.essayKind }"><br>
+		被浏览量<input type="text" name="seeCount" value="${sessionScope.essay.seeCount }"><br>

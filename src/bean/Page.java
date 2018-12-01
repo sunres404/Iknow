@@ -25,6 +25,7 @@ public class Page {
 	public List<Essay> getEssaies() {
 		return essaies;
 	}
+	
 	public void setEssaies(List<Essay> essaies) {
 		this.essaies = essaies;
 	}

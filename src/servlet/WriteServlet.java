@@ -43,6 +43,7 @@ public class WriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		session.removeAttribute(SUtil.SESSION_NAME_WRITEESSAY);
 		User user = (User) session.getAttribute(SUtil.SESSION_NAME_USER);
 		String way = request.getParameter(SUtil.PARAMETER_WAY);
 		String id  = request.getParameter(SUtil.PARAMETER_ID);
@@ -53,7 +54,7 @@ public class WriteServlet extends HttpServlet {
 		WriteServiceImpl writeService = new WriteServiceImpl();
 		Essay essay = writeService.writeEssay(way, id, essayName, user.getUserName(),
 				essayContent, otherInfo, essayKind);
-		session.setAttribute(SUtil.SESSION_NAME_ESSAY, essay);
+		
 		int w;
 		try{
 			w = Integer.parseInt(way);
@@ -64,14 +65,20 @@ public class WriteServlet extends HttpServlet {
 		//暂时先靠这个来确定是
 		if(w == WriteService.WAY_GET_ESSAY_ID){
 			//获得一篇文章去修改...
+			session.setAttribute(SUtil.SESSION_NAME_WRITEESSAY, essay);
+			//这是要写的文章
 			response.sendRedirect(SUtil.URL_PAGE_WRITE);
 			
 		}else if(w == WriteService.WAY_UPDATE_ESSAY){
 			//更新一篇文章
+			session.setAttribute(SUtil.SESSION_NAME_ESSAY, essay);
 			response.sendRedirect(SUtil.URL_PAGE_ESSAY);
-		}else{
+		}else if(w == WriteService.WAY_WRITE_NEW_ESSAY){
 			//新增加了一篇文章
+			session.setAttribute(SUtil.SESSION_NAME_ESSAY, essay);
 			response.sendRedirect(SUtil.URL_PAGE_ESSAY);
+		}else if(w == WriteService.WAY_DELETE_ESSAY){
+			response.sendRedirect(SUtil.URL_SERVLET_USER);
 		}
 	}
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Essay;
 import bean.User;
+import service.impl.LoginServiceImpl;
 import service.impl.UserServiceImpl;
 import utils.Log;
 import utils.SUtil;
@@ -44,12 +45,17 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SUtil.SESSION_NAME_USER);
-		Log.debug(this.getClass().getName(), "获取name=" + user.getUserName() + "所写文章信息");
-		UserServiceImpl userService = new UserServiceImpl();
-		List<Essay> essayList = userService.getEssayByWriterName(user.getUserName());
-		session.setAttribute(SUtil.SESSION_NAME_ESSAYLIST, essayList);
-		Log.debug(this.getClass().getName(), "获取完将跳转至" + SUtil.URL_PAGE_USER);
-		response.sendRedirect(SUtil.URL_PAGE_USER);
+		if(user != null){
+			LoginServiceImpl loginService = new LoginServiceImpl();
+			user = loginService.loginUser(user.getUserName(), user.getUserPassword());
+			session.setAttribute(SUtil.SESSION_NAME_USER, user);
+			Log.debug(this.getClass().getName(), "获取name=" + user.getUserName() + "所写文章信息");
+			UserServiceImpl userService = new UserServiceImpl();
+			List<Essay> essayList = userService.getEssayByWriterName(user.getUserName());
+			session.setAttribute(SUtil.SESSION_NAME_ESSAYLIST, essayList);
+			Log.debug(this.getClass().getName(), "获取完将跳转至" + SUtil.URL_PAGE_USER);
+			response.sendRedirect(SUtil.URL_PAGE_USER);
+		}
 	}
 
 }

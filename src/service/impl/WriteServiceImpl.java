@@ -52,12 +52,15 @@ public class WriteServiceImpl implements WriteService {
 		// TODO Auto-generated method stub
 		int essayId;
 		int essayKind;
-		if(id == null || essayName == null || essayContent == null || esKd == null)return null;
+		if(id == null || essayName == null || essayContent == null || esKd == null){
+			Log.debug(this.getClass().getName(), "id=" + id + " essayName=" + essayName +
+					" essayContent=" + essayContent + " essayKind=" + esKd);
+			return null;
+		}
 		try{
 			essayId = Integer.parseInt(id);
 			essayKind = Integer.parseInt(esKd);
 		}catch(Exception e){
-			e.printStackTrace();
 			Log.error(this.getClass().getName(), "id=" + id + " kind=" + esKd);
 			return null;
 		}
@@ -66,7 +69,22 @@ public class WriteServiceImpl implements WriteService {
 		return essayDao.updateEssay(essayId, essayName, essayContent, otherInfo, essayKind);
 	}
 	
-	
+	private Essay deleteEssay(String id){
+		EssayDaoImpl essayDao = new EssayDaoImpl();
+		int essayId;
+		try{
+			essayId = Integer.parseInt(id);
+		}catch(Exception e){
+			Log.error(this.getClass().getName(), "id=" + id);
+			return null;
+		}
+		if(essayDao.deleteEssay(essayId)){
+			Log.debug(this.getClass().getName(), "成功删除id=" + id + "的文章");
+		}else{
+			Log.debug(this.getClass().getName(), "删除id=" + id + "的文章失败");
+		}
+		return null;
+	}
 	
 	@Override
 	public Essay writeEssay(String w, String id, String essayName, String writerName,
@@ -90,11 +108,16 @@ public class WriteServiceImpl implements WriteService {
 			//更新一篇文章
 			Log.debug(this.getClass().getName(), "更新一篇文章");
 			essay = this.updateEssay(id, essayName, essayContent, otherInfo, essayKind);
-		}else{
+		}else if(way == WAY_WRITE_NEW_ESSAY){
 			//默认新则增加了一篇文章
 			Log.debug(this.getClass().getName(), "新增加了一篇文章");
 			essay = this.addEssay(essayName, writerName, essayContent, otherInfo, essayKind);
+		}else if(way == WAY_DELETE_ESSAY){
+			this.deleteEssay(id);
 		}
+		Log.debug(this.getClass().getName(), "way=" + w + " id=" + id +
+				" essayName=" + essayName + " writerName=" + writerName + " content" +
+				essayContent + " otherInfo" + otherInfo + " essayKind" + essayKind);
 		if(essay != null){
 			Log.debug(this.getClass().getName(),
 					"返回的essay不为空，essayName=" + essay.getEssayName());

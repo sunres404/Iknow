@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户界面</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript">
+function goWrite(){
+	window.location.href="write.html";
+}
+function goLogin(){
+	window.location.href="login.html";
+}
+function goEssay(){
+	window.location.href="essay.html";
+}
+</script>
+</head>
+<body>
+<c:choose>
+	<c:when test="${sessionScope.user == null }">
+		<a href="${pageContext.request.contextPath }/pages/user/login.jsp">用户登陆</a>
+	</c:when>
+	<c:otherwise>
+		<div id="mymessage">
+			<p style="margin-left:100px;font-size:20px;">我的信息</p>
+			<p>用户名：${sessionScope.user.userName }</p>
+			<p>注册日期：${sessionScope.user.registerDate }</p>
+			<p>发布文章数：${sessionScope.uesr.essayCount }</p>
+			<p>浏览量： ${sessionScope.user.seeEssayCount }</p>
+			<c:if test="${sessionScope.user.userKind == 1 }">
+					<img src="success.png" style="width:120px;height:100px;margin-left:100px;margin-top:20px;"/>
+			</c:if>
+		</div>
+		<div id="myartical">
+			<p style="margin-left:100px;font-size:20px;">我的文章</p>
+			
+				所写文章信息：<br>
+				<c:choose>
+					<c:when test="${empty sessionScope.essaylist }">
+						你没写任何文章
+					</c:when>
+					
+					<c:otherwise>
+						<c:forEach var="essay" items="${ sessionScope.essaylist }">
+							<p>${essay.essayName }</p><img src="editor.png" onclick="goWrite()"/><img src="delete.png"/>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+		</div>
+	</c:otherwise>
+</c:choose>
+<div id="mybutton">
+	<img  src="submit.png" onclick="goWrite()" />
+	<img src="quit.png" onclick="goLogin()"/>
+	<a href="${pageContext.request.contextPath }/LogoutServlet">退出</a>
+</div>
+</body>
+</html>

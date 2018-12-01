@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>分类</title>
+<link type="text/css" rel="stylesheet" href="style.css" >
+<script type="text/javascript" src="onclick.js"></script>
+
+</head>
+<body >
+
+<div id="kind">
+	<button type="button" id ="kind1" onclick="select('kind1')">类别1</button>
+	<button type="button" id ="kind2" onclick="select('kind2')">类别2</button>
+	<button type="button" id ="kind3" onclick="select('kind3')">类别3</button>
+	<button type="button" id ="kind4" onclick="select('kind4')">类别4</button>
+	<button type="button" id ="kind5" onclick="select('kind5')">类别5</button>
+	<button type="button" id ="kind6" onclick="select('kind6')">类别6</button>
+	<button type="button" id ="kind7" onclick="select('kind7')">类别7</button>
+</div>
+<div id="otherkind">
+	<button type="button" id="otherkind1" onclick="selectother('otherkind1')">发布日期</button>
+	<button type="button" id="otherkind2" onclick="selectother('otherkind2')">文章热度↑</button>
+	<button type="button" id="otherkind3" onclick="selectother('otherkind3')">文章字数↑</button>
+	<button type="button" id="otherkind4" onclick="selectother('otherkind4')">随机☈</button>
+</div>
+<c:choose>
+		<c:when test="${not empty sessionScope.page }">
+			<c:choose>
+				<c:when test="${not empty sessionScope.page.essaies }">
+					<c:forEach var="essay" items="${sessionScope.page.essaies }">
+						<div id="book">
+							<div>
+								<a id="title" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayName }</a>
+								<a id="content" href="${pageContext.request.contextPath }/EssayServlet?id=${essay.id}">${essay.essayContent }</a>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					文章为空
+				</c:otherwise>
+			</c:choose>
+			<div id="uldiv">
+				<ul class="pagination">
+					<li><a href="${pageContext.request.contextPath }/KindServlet?kind=1&nowPage=${page.nowPage - 1}&order=2" onclick="formPage()">«</a></li>
+					<li><a class="page active" href="" onclick="page(this)">${page.nowPage}</a></li>
+						返回了页码
+						当前页：${page.nowPage }<br>
+						最大页：${page.maxPage }<br>
+					<li><a href="${pageContext.request.contextPath }/KindServlet?kind=1&nowPage=${page.nowPage + 1}&order=2" onclick="nextPage()">»</a></li>
+				</ul>
+			</div>
+		</c:when>
+		<c:otherwise>
+			没有返回页码
+		</c:otherwise>
+</c:choose>
+
+
+<div id="uldiv">
+	<ul class="pagination">
+ 	<li><a href="#" onclick="formPage()">«</a></li>
+ 	<li><a class="page active" href="#" onclick="page(this)">1</a></li>
+	<li><a class="page" href="#" onclick="page(this)">2</a></li>
+    <li><a class="page" href="#" onclick="page(this)">3</a></li>
+  	<li><a class="page" href="#" onclick="page(this)">4</a></li>
+  	<li><a class="page" href="#" onclick="page(this)">5</a></li>
+  	<li><a class="page" href="#" onclick="page(this)">6</a></li>
+  	<li><a class="page" href="#" onclick="page(this)">7</a></li>
+  	<li><a href="#" onclick="nextPage()">»</a></li>
+	</ul>
+</div>
+</body>
+</html>

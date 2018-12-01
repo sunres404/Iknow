@@ -40,20 +40,22 @@ public class KindServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		String kind = request.getParameter(SUtil.PARAMETER_KIND);
 		String nowPage = request.getParameter(SUtil.PARAMETER_NOWPAGE);
 		String order = request.getParameter(SUtil.PARAMETER_ORDER);
 		Log.debug(this.getClass().getName(), "kind=" + kind + " nowPage="
 												+ nowPage + " order=" + order);
+		session.setAttribute(SUtil.SESSION_NAME_KIND, kind);
+		session.setAttribute(SUtil.SESSION_NAME_ORDER, order);
 		KindServiceImpl kindService = new KindServiceImpl();
 		Page page = kindService.getEssayByKind(kind, nowPage, order);
 		if(page != null){
+			session.setAttribute(SUtil.SESSION_NAME_PAGE, page);
 			Log.debug(this.getClass().getName(), "page不为空，将重定向到kind.jsp");
 		}else{
 			Log.debug(this.getClass().getName(), "page为空");
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute(SUtil.SESSION_NAME_PAGE, page);
 		response.sendRedirect(SUtil.URL_PAGE_KIND);
 	}
 

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import utils.Log;
@@ -43,10 +44,38 @@ public class SetEncodeFilter implements Filter {
 		Log.debug(this.getClass().getName(), "设置编码utf-8...");
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
+		CharacterRequest characterRequest = new CharacterRequest(req);
 		//设置请求和响应的编码,拦截所有
 		// pass the request along the filter chain
-		chain.doFilter(req, resp);
+		chain.doFilter(characterRequest, resp);
 	}
+
+//get类的转码，转成utf-8
+class CharacterRequest extends HttpServletRequestWrapper{
+	private HttpServletRequest request;
+	
+	public CharacterRequest(HttpServletRequest request){
+		super(request);
+		this.request = request;
+	}
+	
+	public String getParameter(String name){
+		String value = super.getParameter(name);
+		if(value == null){
+			return null;
+		}
+		String method = super.getMethod();
+		if("get".equalsIgnoreCase(method)){
+			Log.debug(this.getClass().getName(), "get提交方式");
+			try{
+				value = new String(value.getBytes("iso-8859-1"), "utf-8");
+			}catch(Exception e){
+				Log.debug(this.getClass().getName(), e.getMessage());
+			}
+		}
+		return value;
+	}
+}
 
 	/**
 	 * @see Filter#init(FilterConfig)

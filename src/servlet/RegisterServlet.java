@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
 			//用户界面
 		}else{
 			//没有成功注册
-			Log.debug(this.getClass().getName(), "未能成功注册userName=" + userName);
+			Log.debug(this.getClass().getName(), "未能成功注册userName=" + userName + "userPassword=" + password);
 			response.sendRedirect(SUtil.URL_PAGE_REGISTER);
 			//退回到注册页面
 		}
